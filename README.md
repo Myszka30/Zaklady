@@ -1,5 +1,5 @@
-
-```config.php
+config.php
+```php
 <?php
 $ip = "<ip serwera msql>";
 $port = <port>;
