@@ -11,12 +11,14 @@ if (isset($_POST['login']) && $_POST['login'] != '' && isset($_POST['haslo']) &&
     //echo (password_hash($haslo, PASSWORD_DEFAULT));
     $login = mysqli_real_escape_string($conn, $login);
     $haslo = mysqli_real_escape_string($conn, $haslo);
-    $q = "SELECT password_hash FROM users WHERE username=\"$login\"";
+    $q = "SELECT password_hash, id FROM users WHERE username=\"$login\"";
     $wynik = mysqli_query($conn, $q);
     if (mysqli_num_rows($wynik) == 1)
         if(password_verify($haslo, mysqli_fetch_assoc($wynik)['password_hash']))
             {
                 $_SESSION["LOGIN"] = $_POST['login'];
+                $_SESSION["user_id"] = mysqli_fetch_assoc($wynik)["id"];
+
                 header("location: ./");
             }
     else{}

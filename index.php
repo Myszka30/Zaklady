@@ -1,7 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['LOGIN']))
+require_once('./config.php');
+if (!isset($_SESSION['LOGIN'])) {
     header("location: ./login.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,17 +23,66 @@ if (!isset($_SESSION['LOGIN']))
 
 <body data-bs-theme="dark">
 
+    <?php
+    //echo password_hash("test123", PASSWORD_DEFAULT);
+    if (isset($_SESSION['blad'])) {
+        echo ("<p class=\"text-danger h1 text-center\">$_SESSION[blad]</p>");
+        unset($_SESSION['blad']);
+    }
+    ?>
 
+    <div class="container">
+        <div class="row" id="bety">
+            <?php
+
+            echo <<<_EOF
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Twoje konto</h6>
+                        <p class="card-text">Tutaj znajdziesz informacje o swoim koncie i aktualnych zakładach.</p>
+                        <a href="#" class="card-link">Moje zakłady</a>
+                        <a href="#" class="card-link">Ustawienia</a>
+                    </div>
+                </div>
+            </div>
+            _EOF;
+            ?>
+        </div>
+
+    </div>
     <ul class="nav nav-underline nav-fill fixed-bottom">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Zakłady</a>
+            <a class="nav-link active" href="./index.php">Zakłady</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="./logout.php">Wyloguj się</a>
+            <a class="nav-link" href="./profile.php">Profil</a>
         </li>
-    </ul>
+        <li class="nav-item">
+            <a class="nav-link <?php if ($_SESSION['LOGIN'] != "admin")
+                echo "disabled" ?>" href="./nowy_zaklad.php">Stwórz
+                    zakład</a> <!-- #TODO dla zwykłych ludzi też zrób-->
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./logout.php">Wyloguj się</a>
+            </li>
+        </ul>
 
 
-</body>
+    </body>
 
-</html>
+    </html>
+
+    <script>
+        async function refreshDivs() {
+            const [aktualne] = await Promise.all([
+                fetch('./partials/zaklady.php', { cache: 'no-store' }).then(r => r.text()),
+            ]);
+
+            document.getElementById('bety').innerHTML = aktualne;
+        }
+
+        refreshDivs();
+        setInterval(refreshDivs, 5000);
+    </script>
