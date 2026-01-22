@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
 require_once('./config.php');
 
@@ -38,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'creat
     $_SESSION['blad'] = "Uzupełnij username i hasło.";
     header("location: ./admin.php"); exit;
   }
-  if (!in_array($role, ['admin','user'], true)) $role = 'user';
+  if (!in_array($role, ['admin','user', 'userplus'], true)) $role = 'user';
 
   $hash = password_hash($pass1, PASSWORD_DEFAULT); // [web:267]
 
@@ -168,6 +164,7 @@ $stmt->close();
           <label class="form-label">Rola</label>
           <select class="form-select" name="role">
             <option value="user" selected>user</option>
+            <option value="userplus">user plus</option>
             <option value="admin">admin</option>
           </select>
         </div>
@@ -223,5 +220,8 @@ $stmt->close();
   </div>
 
 </div>
+
+
+<?php $page = "admin.php"; require("./partials/bottom.php")?>
 </body>
 </html>

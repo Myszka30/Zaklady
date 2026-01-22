@@ -7,7 +7,7 @@ session_start();
 require_once('./config.php');
 
 if (!isset($_SESSION['LOGIN'])) { header("location: ./login.php"); exit; }
-if ($_SESSION['LOGIN'] !== 'admin') { $_SESSION['blad']="Brak uprawnień."; header("location: ./index.php"); exit; }
+if ($_SESSION['role'] !== 'admin' || $_SESSION['role'] !== 'userplus') { $_SESSION['blad']="Brak uprawnień."; header("location: ./index.php"); exit; }
 
 $username = $_SESSION['LOGIN'];
 
@@ -117,6 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
 </div>
-
+<?php $page = "nowy_zaklad.php"; require("./partials/bottom.php")?>
 </body>
 </html>

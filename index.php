@@ -42,23 +42,7 @@ if (isset($_SESSION['blad'])) {
   </div>
 </div>
 
-<ul class="nav nav-underline nav-fill fixed-bottom">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.php">Zakłady</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./profile.php">Profil</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link <?php if($_SESSION['LOGIN']!="admin") echo "disabled"?>" href="./nowy_zaklad.php">Stwórz zakład</a>
-  </li>
-  <li class="nav-item">
-  <a class="nav-link <?php if($_SESSION['LOGIN']!="admin") echo "disabled"?>" href="./admin.php">Admin</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="./logout.php">Wyloguj się</a>
-  </li>
-</ul>
+<?php $page = "index.php"; require_once("./partials/bottom.php")?>
 
 <script>
 async function refreshDivs() {
