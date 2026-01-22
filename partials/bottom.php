@@ -1,7 +1,7 @@
 <?php if (!isset($page))
     die(); ?>
 <link rel="stylesheet" href="bottom.css">
-<ul class="nav nav-underline nav-fill fixed-bottom">
+<ul class="nav nav-underline nav-fill fixed-bottom bg-secondary-subtle">
     <li class="nav-item">
         <a class="nav-link <?php if ($page == "index.php")
             echo "active" ?>" href="./index.php"><div class="nawigacja">
@@ -17,6 +17,12 @@
             </div></a>
         </li>
 </ul>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js");
+}
+</script>
+
 
 
 

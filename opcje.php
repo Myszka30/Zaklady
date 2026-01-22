@@ -22,7 +22,7 @@ require_once('./partials/auth.php');
 
 <body data-bs-theme="dark" class="bg-secondary-subtle">
     <div class="container">
-        <h1 class="text-center">Witaj <?php echo "$_SESSION[LOGIN]"?></h1>
+        <h1 class="text-center pb-3 pt-4">Witaj <?php echo "$_SESSION[LOGIN]"?></h1>
     <ul class="list-group ">
         <li class="list-group-item"><a href="./profile.php">Profil</a></li>
         <?php if ($_SESSION['role'] == "userplus" || $_SESSION['role'] == "admin")
