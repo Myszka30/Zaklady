@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 session_start();
 require_once('./config.php');
 
-if (!isset($_SESSION['LOGIN'])) { header("location: ./login.php"); exit; }
-if ($_SESSION['role'] !== 'admin' || $_SESSION['role'] !== 'userplus') { $_SESSION['blad']="Brak uprawnień."; header("location: ./index.php"); exit; }
+$auth = "userplus";
+require_once('./partials/auth.php');
 
 $username = $_SESSION['LOGIN'];
 

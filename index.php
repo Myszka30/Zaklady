@@ -15,7 +15,7 @@ if (!isset($_SESSION['LOGIN'])) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body data-bs-theme="dark">
+<body data-bs-theme="dark" class="bg-secondary-subtle">
 
 <?php
 if (isset($_SESSION['blad'])) {
@@ -25,6 +25,9 @@ if (isset($_SESSION['blad'])) {
 ?>
 
 <div class="container">
+  <div class="col-12">
+        <h1 class="text-center">Zakłady:</h1>
+  </div>
   <div class="row" id="bety">
     <?php
     echo <<< _EOF
