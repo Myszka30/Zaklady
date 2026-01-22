@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 require_once('./config.php');
 
@@ -11,17 +13,19 @@ if (isset($_POST['login']) && $_POST['login'] != '' && isset($_POST['haslo']) &&
     //echo (password_hash($haslo, PASSWORD_DEFAULT));
     $login = mysqli_real_escape_string($conn, $login);
     $haslo = mysqli_real_escape_string($conn, $haslo);
-    $q = "SELECT password_hash, id FROM users WHERE username=\"$login\"";
+    $q = "SELECT password_hash, id, role FROM users WHERE username=\"$login\"";
     $wynik = mysqli_query($conn, $q);
     if (mysqli_num_rows($wynik) == 1)
-        if(password_verify($haslo, mysqli_fetch_assoc($wynik)['password_hash']))
+        $row = mysqli_fetch_assoc($wynik);
+        if(password_verify($haslo, $row["password_hash"]))
             {
+                
                 $_SESSION["LOGIN"] = $_POST['login'];
-                $_SESSION["user_id"] = mysqli_fetch_assoc($wynik)["id"];
+                $_SESSION["user_id"] = $row["id"];
+                $_SESSION['role'] = $row['role'];
 
                 header("location: ./");
             }
-    else{}
     else
         $_SESSION['blad'] = "Błędny login lub hasło";
 
