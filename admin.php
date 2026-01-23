@@ -306,7 +306,7 @@ $stmt->close();
     <div class="accordion-item">
       <h2 class="accordion-header" id="hUsers">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cUsers" aria-expanded="false" aria-controls="cUsers">
-          Użytkownicy (rola + aktywność)
+          Użytkownicy
         </button>
       </h2>
       <div id="cUsers" class="accordion-collapse collapse" aria-labelledby="hUsers" data-bs-parent="#adminAccordion">
@@ -405,9 +405,6 @@ $stmt->close();
               <?php endforeach; ?>
               </tbody>
             </table>
-          </div>
-          <div class="text-body-secondary small">
-            Uwaga: “Użyty” to `used_at`. Jeśli jest “-”, link jeszcze nie został wykorzystany.
           </div>
         </div>
       </div>
